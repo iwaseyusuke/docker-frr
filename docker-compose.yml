@@ -1,0 +1,11 @@
+version: '2'
+services:
+  frr:
+    build:
+      context: .
+      args:
+        user: iwaseyusuke
+    image: iwaseyusuke/frr
+    tty: true
+    network_mode: "bridge"
+    privileged: true
