@@ -1,11 +1,13 @@
 version: '2'
 services:
   frr:
+    image: iwaseyusuke/frr
     build:
       context: .
       args:
         user: iwaseyusuke
-    image: iwaseyusuke/frr
+    environment:
+      FRR_DAEMONS: zebra
     tty: true
     network_mode: "bridge"
     privileged: true

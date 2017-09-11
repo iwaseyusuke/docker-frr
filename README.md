@@ -42,3 +42,16 @@ Open `vtysh`:
 ```
 root@xxxxxxxxxxxx:~# vtysh
 ```
+
+## Magic environment value `FRR_DAEMONS`
+
+You can specify FRRouting daemons to be started by using environment value
+`FRR_DAEMONS`.
+
+```
+$ vi docker-compose.yml
+...(snip)...
+  environment:
+    FRR_DAEMONS: zebra bgpd ospfd
+...(snip)...
+```

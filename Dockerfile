@@ -9,6 +9,8 @@ ARG branch_name=frr-2.0
 USER root
 WORKDIR /root
 
+COPY ENTRYPOINT.sh /ENTRYPOINT.sh
+
 # Install dependencies
 RUN apt-get update && apt-get install -yq --no-install-recommends \
     git \
@@ -84,8 +86,10 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
  && touch /etc/frr/vtysh.conf \
  && cp /root/frr/cumulus/etc/frr/debian.conf /etc/frr/debian.conf \
  && cp /root/frr/cumulus/etc/frr/daemons     /etc/frr/daemons \
- && sed -i "s/zebra=no/zebra=yes/"           /etc/frr/daemons \
 # Prepare init.d script
  && cp /root/frr/tools/frr /etc/init.d/ \
- && sed -i "s/frr:frr/root:root/" /etc/init.d/frr
+ && sed -i "s/frr:frr/root:root/" /etc/init.d/frr \
+# Prepare ENTRYPOINT.sh
+ && chmod +x /ENTRYPOINT.sh
 
+ENTRYPOINT ["/ENTRYPOINT.sh"]
